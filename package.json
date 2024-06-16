@@ -1,0 +1,22 @@
+{
+  "name": "tokenlist-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.6.8",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.3",
+    "fs": "^0.0.1-security",
+    "nodemon": "^3.1.0",
+    "path": "^0.12.7"
+  }
+}
