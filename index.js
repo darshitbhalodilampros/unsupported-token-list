@@ -14,6 +14,16 @@ const allowOrigin = "https://app.udonswap.org";
 app.use(cors());
 app.use(express.json());
 
+app.get('/api/unitags/:address', async (req, res) => {
+  const { address } = req.params;
+  try {
+      const response = await axios.get(`https://api.uniswap.org/unitags/address?address=${address}`);
+      res.json(response.data);
+  } catch (error) {
+      res.status(500).send('Error fetching data from Uniswap API');
+  }
+});
+
 app.get("/v3-tokens", (req, res) => {
   const jsonFilePath = path.join(__dirname, "uniswap-default.tokenlist.json"); // Update this with your file name
   try {
