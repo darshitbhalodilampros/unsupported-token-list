@@ -14,12 +14,23 @@ const allowOrigin = "https://app.udonswap.org";
 app.use(cors());
 app.use(express.json());
 
-app.get('/api/unitags/:address', async (req, res) => {
-  const { address } = req.params;
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
+
+// Define the proxy route
+app.get('/api/unitags/address', async (req, res) => {
+  const { address } = req.query;
+  if (!address) {
+      return res.status(400).send('Address query parameter is required');
+  }
   try {
-      const response = await axios.get(`https://api.uniswap.org/unitags/address?address=${address}`);
+      const response = await axios.get(`https://unitags.interface.gateway.uniswap.org/v2/unitags/address?address=${address}`);
       res.json(response.data);
   } catch (error) {
+      console.error('Error fetching data from Uniswap API:', error);
       res.status(500).send('Error fetching data from Uniswap API');
   }
 });
